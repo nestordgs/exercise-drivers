@@ -1,0 +1,15 @@
+{
+  "name": "app-backend",
+  "version": "1.0.0",
+  "description": "Ejercicio Vendy (Server)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Api",
+    "RestFul"
+  ],
+  "author": "Nestor Gutierrez",
+  "license": "ISC"
+}
