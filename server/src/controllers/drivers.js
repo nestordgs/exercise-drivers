@@ -1,4 +1,4 @@
-import { Drivers, Drivers_Phones } from '../models'
+import { Drivers, Drivers_Phones, States, Cities } from '../models'
 import deepUpdate from '../helpers/deepUpdate'
 
 module.exports = {
@@ -12,7 +12,12 @@ module.exports = {
     let data = {
       name: req.body.name,
       last_name: req.body.last_name,
-      email: req.body.email
+      email: req.body.email,
+      stateId: req.body.stateId,
+      street: req.body.street,
+      zipCode: req.body.zipCode,
+      typeCar: req.body.typeCar,
+      carYear: req.body.carYear,
     }
     if (req.body.phones) {
       data.phones = req.body.phones
@@ -36,8 +41,12 @@ module.exports = {
    */
   findAll(req, res) {
     Drivers.findAll({
+      attributes: {
+        exclude: ['CityId', 'StateId']
+      },
       include: [
-        { model: Drivers_Phones, as: 'phones' }
+        { model: Drivers_Phones, as: 'phones' },
+        { model: States },
       ]
     })
       .then(driver => res.send(driver))
@@ -52,8 +61,12 @@ module.exports = {
    */
   findById(req, res) {
     Drivers.findById(req.params.id, {
+      attributes: {
+        exclude: ['CityId', 'StateId']
+      },
       include: [
-        { model: Drivers_Phones, as: 'phones' }
+        { model: Drivers_Phones, as: 'phones' },
+        { model: States },
       ]
     })
       .then(driver => {
@@ -84,11 +97,6 @@ module.exports = {
           return res.status(404).send({
             message: 'Driver Not Found'
           })
-        }
-        let DriverData = {
-          name: req.body.name || driver.name,
-          last_name: req.body.last_name || driver.last_name,
-          email: req.body.email || driver.email
         }
         return deepUpdate(driver, req.body)
       })

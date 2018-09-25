@@ -17,6 +17,26 @@ module.exports = {
       email: {
         type: Sequelize.STRING
       },
+      stateId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'SET NULL',
+        references: {
+          model: 'States',
+          key: 'id',
+        }
+      },
+      street: {
+        type: Sequelize.STRING
+      },
+      zipCode: {
+        type: Sequelize.STRING(10)
+      },
+      typeCar: {
+        type: Sequelize.INTEGER
+      },
+      carYear: {
+        type: Sequelize.DATE
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

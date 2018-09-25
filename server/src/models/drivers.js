@@ -7,16 +7,53 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         isEmail: { msg: `This don't look like an email` },
-        notEmpty: { msg: `The email is required` }
+        notEmpty: { msg: `The email is required` },
+        isUnique(value, next) {
+          Drivers.findOne({
+            where: {email: value},
+            attributes: ['id']
+          }).then((driver) => {
+            if (driver) {
+              return next(`The email "${value}" is already in use`)
+            }
+            next()
+          })
+        }
       }
-    }
+    },
+    stateId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    street: {
+      type: DataTypes.STRING,
+    },
+    zipCode: {
+      type: DataTypes.STRING,
+      validate: {
+        len: [2, 10]
+      }
+    },
+    typeCar: {
+      type: DataTypes.INTEGER,
+      validate: {
+        isInt: true,
+        isZipCode(value, next) {
+          if (! /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(value) ) {
+            return next(`The Zip Code provided is wrong`)
+          }
+          next()
+        }
+      }
+    },
+    carYear: {
+      type: DataTypes.DATE,
+    },
   }, {
-    index: [
+    indexes: [
       {
         unique: true,
         fields: ['email']
-      }
-    ],
   });
   Drivers.associate = function(models) {
     // associations can be defined here
@@ -24,6 +61,9 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'driverId',
       as: 'phones'
     });
+    Drivers.belongsTo(models.States, {
+      onDelete: 'SET NULL'
+    })
   };
   return Drivers
 };
