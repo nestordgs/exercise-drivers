@@ -39,8 +39,13 @@ module.exports = {
       zipCode: {
         type: Sequelize.STRING(10)
       },
-      typeCar: {
-        type: Sequelize.INTEGER
+      typeCarId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'SET NULL',
+        references: {
+          model: 'Type_Cars',
+          key: 'id',
+        }
       },
       carYear: {
         type: Sequelize.DATE

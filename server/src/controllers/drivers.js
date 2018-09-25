@@ -1,4 +1,4 @@
-import { Drivers, Drivers_Phones, States, Cities } from '../models'
+import { Drivers, Drivers_Phones, States, Cities, Type_Cars } from '../models'
 import deepUpdate from '../helpers/deepUpdate'
 
 module.exports = {
@@ -17,7 +17,7 @@ module.exports = {
       cityId: req.body.cityId,
       street: req.body.street,
       zipCode: req.body.zipCode,
-      typeCar: req.body.typeCar,
+      typeCarId: req.body.typeCarId,
       carYear: req.body.carYear,
     }
     if (req.body.phones) {
@@ -43,12 +43,13 @@ module.exports = {
   findAll(req, res) {
     Drivers.findAll({
       attributes: {
-        exclude: ['CityId', 'StateId']
+        exclude: ['CityId', 'StateId', 'TypeCarId']
       },
       include: [
         { model: Drivers_Phones, as: 'phones' },
         { model: States },
         { model: Cities },
+        { model: Type_Cars },
       ]
     })
       .then(driver => res.send(driver))
@@ -64,12 +65,13 @@ module.exports = {
   findById(req, res) {
     Drivers.findById(req.params.id, {
       attributes: {
-        exclude: ['CityId', 'StateId']
+        exclude: ['CityId', 'StateId', 'typeCar']
       },
       include: [
         { model: Drivers_Phones, as: 'phones' },
         { model: States },
         { model: Cities },
+        { model: Type_Cars },
       ]
     })
       .then(driver => {

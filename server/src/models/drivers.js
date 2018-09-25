@@ -35,20 +35,19 @@ module.exports = (sequelize, DataTypes) => {
     zipCode: {
       type: DataTypes.STRING,
       validate: {
-        len: [2, 10]
-      }
-    },
-    typeCar: {
-      type: DataTypes.INTEGER,
-      validate: {
-        isInt: true,
+        len: [2, 10],
         isZipCode(value, next) {
+          // example = 90210
           if (! /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(value) ) {
             return next(`The Zip Code provided is wrong`)
           }
           next()
         }
       }
+    },
+    typeCarId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     carYear: {
       type: DataTypes.DATE,
@@ -71,6 +70,9 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'SET NULL'
     })
     Drivers.belongsTo(models.Cities, {
+      onDelete: 'SET NULL'
+    })
+    Drivers.belongsTo(models.Type_Cars, {
       onDelete: 'SET NULL'
     })
   };

@@ -1,33 +1,33 @@
-import { States } from '../models'
+import { Type_Cars } from '../models'
 
 module.exports = {
   /**
-   * Get States List.
+   * Get Type Car List.
    *
    * @param {*} req
    * @param {*} res
    */
   findAll(req, res) {
-    States.findAll()
-      .then((states => res.send(states)))
+    Type_Cars.findAll()
+      .then((typeCars => res.send(typeCars)))
       .catch(err => res.status.send(err))
   },
 
   /**
-   * Get States by #ID.
+   * Get Type Car by #ID.
    *
    * @param {*} req
    * @param {*} res
    */
   findById(req, res) {
-    States.findById(req.params.id)
-      .then((state) => {
-        if (!state) {
+    Type_Cars.findById(req.params.id)
+      .then((typeCar) => {
+        if (!typeCar) {
           return res.status(404).send({
-            message: 'State Not Found'
+            message: 'Type Car Not Found'
           })
         }
-        res.status(200).send(state)
+        res.status(200).send(typeCar)
       })
       .catch(err => res.status(400).send(err))
   }
