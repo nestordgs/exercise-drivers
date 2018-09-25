@@ -14,6 +14,7 @@ module.exports = {
       last_name: req.body.last_name,
       email: req.body.email,
       stateId: req.body.stateId,
+      cityId: req.body.cityId,
       street: req.body.street,
       zipCode: req.body.zipCode,
       typeCar: req.body.typeCar,
@@ -47,6 +48,7 @@ module.exports = {
       include: [
         { model: Drivers_Phones, as: 'phones' },
         { model: States },
+        { model: Cities },
       ]
     })
       .then(driver => res.send(driver))
@@ -67,6 +69,7 @@ module.exports = {
       include: [
         { model: Drivers_Phones, as: 'phones' },
         { model: States },
+        { model: Cities },
       ]
     })
       .then(driver => {

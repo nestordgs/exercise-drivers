@@ -25,6 +25,14 @@ module.exports = {
           key: 'id',
         }
       },
+      cityId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'SET NULL',
+        references: {
+          model: 'Cities',
+          key: 'id',
+        }
+      },
       street: {
         type: Sequelize.STRING
       },

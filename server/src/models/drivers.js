@@ -25,6 +25,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
+    cityId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     street: {
       type: DataTypes.STRING,
     },
@@ -54,6 +58,8 @@ module.exports = (sequelize, DataTypes) => {
       {
         unique: true,
         fields: ['email']
+      },
+    ]
   });
   Drivers.associate = function(models) {
     // associations can be defined here
@@ -62,6 +68,9 @@ module.exports = (sequelize, DataTypes) => {
       as: 'phones'
     });
     Drivers.belongsTo(models.States, {
+      onDelete: 'SET NULL'
+    })
+    Drivers.belongsTo(models.Cities, {
       onDelete: 'SET NULL'
     })
   };
