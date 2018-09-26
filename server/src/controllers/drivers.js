@@ -57,9 +57,19 @@ module.exports = {
             message: 'Driver, Client Braintree and Credit Card created successfully'
           })
         } else {
+          const driverDeleteByError = driver.destroy({
+            where: {
+              id: driver.id,
+            }
+          })
           return res.status(400).send(creditCard)
         }
       } else {
+        const driverDeleteByError = driver.destroy({
+          where: {
+            id: driver.id,
+          }
+        })
         return res.status(400).send(clientBraintree)
       }
     } catch (err) {
