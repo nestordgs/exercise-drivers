@@ -12,7 +12,7 @@ const options = {
 		position: SnotifyPosition.rightTop,
 		showProgressBar: false,
 		closeOnClick: true,
-		pauseOnHover: false
+		pauseOnHover: true
 	}
 }
 
@@ -42,9 +42,15 @@ Vue.use(VeeValidate)
 Vue.mixin({
 	methods: {
 		errorResponse : function (response, title = 'Error') {
-      response.errors.forEach(error => {
-        this.$snotify.error(error.message, title)
-      });
+			if (response.message) {
+				this.$snotify.error(response.message, title)
+			} else {
+				response.errors.forEach(error => {
+					if (error.message) {
+						this.$snotify.error(error.message, title)
+					}
+				});
+			}
 		}
 	}
 })
