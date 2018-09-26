@@ -25,3 +25,19 @@ npm run build
 ```
 npm run lint
 ```
+
+
+## Validations
+
+### Phone Number
+For validate phone number use simple regex
+```javascript
+    var regex = "/^\+?\d{4,12}(-)?\d+?$/";
+```
+1. _examples success:_
+* 0123-4567896
+* 1234567890
+* +1234567890
+* +1234567890 <Enter>
+2. _example fail:_
+* (0123)4567890
