@@ -13,6 +13,6 @@ router.get('/', (req, res) => res.status(200).send({
 router.use('/drivers', driverRoutes)
 router.use('/states', stateRouter)
 router.use('/cities', cityRouter)
-router.use('/typeCar', typeCarRouter)
+router.use('/typeCars', typeCarRouter)
 
 export default router
