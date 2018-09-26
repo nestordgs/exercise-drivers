@@ -1,4 +1,4 @@
-# front
+# Front
 
 ## Project setup
 ```
@@ -30,7 +30,7 @@ npm run lint
 ## Validations
 
 ### Phone Number
-For validate phone number use simple regex
+To validate phone number use simple regex
 ```javascript
     var regex = "/^\+?\d{4,12}(-)?\d+?$/";
 ```
