@@ -13,7 +13,7 @@ Copy config-env.js file and set your braintree keys.
 ### Database
 Go to config.json and set your DB values for development, test and production.
 
-#IMPORTANT
+# IMPORTANT
 If you do not have sequelize-cli installed in your system, please read [Sequelize-cli documentation](https://github.com/sequelize/cli)
 
 ## Scripts
