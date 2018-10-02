@@ -7,7 +7,15 @@ const presets = [
       safari: "11.1"
     },
     useBuiltIns: "usage"
-  }]
+  }],
+  ["minify"]
 ]
 
-module.exports = { presets }
+const plugins = [
+  '@babel/plugin-transform-async-to-generator',
+  '@babel/plugin-transform-arrow-functions',
+  '@babel/plugin-proposal-async-generator-functions',
+  '@babel/plugin-transform-modules-amd',
+]
+
+module.exports = { presets, plugins }
